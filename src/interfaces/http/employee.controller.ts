@@ -18,7 +18,6 @@ import { PaginationDto } from "src/application/core/dto/pagination.dto";
 import { UpdateEmployeeDto } from "./dto/employee/update-employee.dto";
 import { UpdateEmployeeCommand } from "src/application/cqrs/commands/employee/update-employee.command";
 import { GetEmployeesNotInCompanyQuery } from "src/application/cqrs/queries/employee/get-non-in-company-employees.command";
-import { Employee } from "src/infrastructure/database/entities/employee.entity";
 
 @ApiTags('employees')
 @Controller('employees')
@@ -43,7 +42,7 @@ export class EmployeeController {
     async getEmployeesNotInCompany(
         @Param("companyId") companyId: string,
         @Query() pagination: PaginationDto,
-    ): Promise<{ data: Employee[]; total: number }> {
+    ): Promise<{ data: EmployeeEntity[]; total: number }> {
         return this.queryBus.execute(new GetEmployeesNotInCompanyQuery(companyId, Number(pagination.offset), Number(pagination.limit)));
     }
 
