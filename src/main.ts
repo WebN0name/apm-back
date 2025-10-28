@@ -45,6 +45,6 @@ async function bootstrap() {
   if (!port) {
     throw new Error('PORT is not defined in the configuration');
   }
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
 }
 bootstrap();
